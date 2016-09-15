@@ -1,16 +1,10 @@
 
-def evaluate(x)
-	if x % 100 == 0
-		if x % 400 == 0
-			true
-		else
-			false
-		end
-	elsif x % 4 == 0
-		true
-	else
-		false
-	end
+def leap_year?(year)
+	multiple?(year, 100) ? multiple?(year, 400) : multiple?(year, 4)
+end
+
+def multiple?(year, divisor)
+	year % divisor == 0
 end
 
 def amount(a)
