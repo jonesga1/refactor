@@ -22,20 +22,19 @@ def convert_military_to_standard(time_in_standard)
 	minute, am_or_pm = minute_and_am_or_pm.split(" ")
 	time_in_military = ""
 
-	if am_or_pm.downcase != 'am'
-		if hour.to_i == 12
-			time_in_military = hour + ":" + minute
-		else
-			time_in_military = (hour.to_i + 12).to_s + ":" + minute
-		end
-	elsif am_or_pm.downcase != 'pm'
-		if hour.to_i == 12
-			time_in_military = (hour.to_i - 12).to_s + ":" + minute
-		else
-			time_in_military = hour + ":" + minute
-		end
-	end
+	am_or_pm.downcase != 'am' ? time_in_military = am_converter(hour, minute) : time_in_military = pm_converter(hour, minute)
 
+	return time_in_military
+end
+
+def am_converter(hour, minute)
+	hour.to_i == 12 ? time_in_military = hour + ":" + minute : time_in_military = (hour.to_i + 12).to_s + ":" + minute
+	return time_in_military
+end
+
+
+def pm_converter(hour, minute)
+	hour.to_i == 12 ? time_in_military = (hour.to_i - 12).to_s + ":" + minute : time_in_military = hour + ":" + minute
 	return time_in_military
 end
 
