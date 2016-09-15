@@ -7,30 +7,36 @@ def multiple?(year, divisor)
 	year % divisor == 0
 end
 
-def amount(a)
-	('%.1f' % ((a / 31536000.0) * 100)) + '%'
+def percent_year_in_seconds(seconds)
+	format_as_percentage((seconds / SECONDS_IN_YEAR) * 100)
 end
 
-def convert(x)
-	a, b = x.split(":")
-	c, d = b.split(" ")
-	e = ""
+SECONDS_IN_YEAR = 1.0 * 60 * 60 * 24 * 365
 
-	if d.downcase != 'am'
-		if a.to_i == 12
-			e = a + ":" + c
+def format_as_percentage(number)
+	'%.1f' % number + '%'
+end
+
+def convert_military_to_standard(time_in_standard)
+	hour, minute_and_am_or_pm = time_in_standard.split(":")
+	minute, am_or_pm = minute_and_am_or_pm.split(" ")
+	time_in_military = ""
+
+	if am_or_pm.downcase != 'am'
+		if hour.to_i == 12
+			time_in_military = hour + ":" + minute
 		else
-			e = (a.to_i + 12).to_s + ":" + c
+			time_in_military = (hour.to_i + 12).to_s + ":" + minute
 		end
-	elsif d.downcase != 'pm'
-		if a.to_i == 12
-			e = (a.to_i - 12).to_s + ":" + c
+	elsif am_or_pm.downcase != 'pm'
+		if hour.to_i == 12
+			time_in_military = (hour.to_i - 12).to_s + ":" + minute
 		else
-			e = a + ":" + c
+			time_in_military = hour + ":" + minute
 		end
 	end
 
-	return e
+	return time_in_military
 end
 
 def convert2(x)

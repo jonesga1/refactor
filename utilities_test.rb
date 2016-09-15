@@ -25,4 +25,25 @@ describe 'Utilities' do
       leap_year?(1933).must_equal(false)
     end
   end
+
+  describe 'percent_year_in_seconds' do
+    it '3153600 seconds is 10% of a year' do
+      percent_year_in_seconds(3153600).must_equal('10.0%')
+    end
+    it '4000000 seconds is 12.7% of a year' do
+      percent_year_in_seconds(4000000).must_equal('12.7%')
+    end
+  end
+
+  describe 'convert_military_to_standard' do
+    it 'Times in PM add 12' do
+      convert_military_to_standard('3:50 PM').must_equal('15:50')
+      convert_military_to_standard('4:20 PM').must_equal('16:20')
+    end
+    it 'Times in AM stay the same' do
+      convert_military_to_standard('3:50 AM').must_equal('3:50')
+      convert_military_to_standard('4:20 AM').must_equal('4:20')
+    end
+
+  end
 end
