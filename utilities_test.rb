@@ -54,4 +54,19 @@ describe 'Utilities' do
       convert_standard_to_military('15:50').must_equal('3:50 pm')
     end
   end
+
+  describe 'bedtime?' do
+    it 'Time over 8pm and a weekday is bedtime' do
+      bedtime?("8:23 pm", true).must_equal(true)
+    end
+    it 'Time over 10pm and not a weekday is bedtime' do
+      bedtime?("10:30 pm", false).must_equal(true)
+    end
+    it 'Time under 10pm on a weekend is not bedtime' do
+      bedtime?("8:23 pm", false).must_equal(false)
+    end
+    it 'Time under 8pm on a weekday is not bedtime' do
+      bedtime?("7:25 pm", true).must_equal(false)
+    end
+  end
 end

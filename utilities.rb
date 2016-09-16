@@ -37,14 +37,13 @@ def convert_standard_to_military(time_in_military)
 	hour.to_i < 12 ? hour + ":" + minute + " am" : (hour.to_i - 12).to_s + ":" + minute + " pm"
 end
 
-def okay(a, b)
-	c = false
-	if (a.split(":")[0].to_i >= 8 && b || a.split(":")[0].to_i >= 10 && !b) && a.split(":")[1].split(" ")[1] == 'pm'
-		c = false
+def bedtime?(time, is_weekday)
+	if (time.split(":")[0].to_i >= 8 && is_weekday || time.split(":")[0].to_i >= 10 && !is_weekday) && time.split(":")[1].split(" ")[1] == 'pm'
+		bedtime = true
 	else
-		c = true
+		bedtime = false
 	end
-	return c
+	return bedtime
 end
 
 def span(a, b)
