@@ -44,6 +44,14 @@ describe 'Utilities' do
       convert_military_to_standard('3:50 AM').must_equal('3:50')
       convert_military_to_standard('4:20 AM').must_equal('4:20')
     end
+  end
 
+  describe 'convert_standard_to_military' do
+    it 'Times under 12 stay the same and add am' do
+      convert_standard_to_military('3:50').must_equal('3:50 am')
+    end
+    it 'Times over 12 subtract 12 and add pm' do
+      convert_standard_to_military('15:50').must_equal('3:50 pm')
+    end
   end
 end

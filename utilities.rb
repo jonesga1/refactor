@@ -1,4 +1,3 @@
-
 def leap_year?(year)
 	multiple?(year, 100) ? multiple?(year, 400) : multiple?(year, 4)
 end
@@ -20,11 +19,7 @@ end
 def convert_military_to_standard(time_in_standard)
 	hour, minute_and_am_or_pm = time_in_standard.split(":")
 	minute, am_or_pm = minute_and_am_or_pm.split(" ")
-	time_in_military = ""
-
-	am_or_pm.downcase != 'am' ? time_in_military = am_converter(hour, minute) : time_in_military = pm_converter(hour, minute)
-
-	return time_in_military
+	am_or_pm.downcase != 'am' ? am_converter(hour, minute) : pm_converter(hour, minute)
 end
 
 def am_converter(hour, minute)
@@ -32,23 +27,14 @@ def am_converter(hour, minute)
 	return time_in_military
 end
 
-
 def pm_converter(hour, minute)
 	hour.to_i == 12 ? time_in_military = (hour.to_i - 12).to_s + ":" + minute : time_in_military = hour + ":" + minute
 	return time_in_military
 end
 
-def convert2(x)
-	a, b = x.split(":")
-	c = ""
-
-	if a.to_i < 12
-		c = a + b + " am"
-	else
-		c = a + b + " pm"
-	end
-
-	return c
+def convert_standard_to_military(time_in_military)
+	hour, minute = time_in_military.split(":")
+	hour.to_i < 12 ? hour + ":" + minute + " am" : (hour.to_i - 12).to_s + ":" + minute + " pm"
 end
 
 def okay(a, b)
