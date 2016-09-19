@@ -46,16 +46,6 @@ def bedtime?(time, is_weekday)
 	return bedtime
 end
 
-def span(a, b)
-	c = 0
-	d = 0
-	if a < b
-		c = b
-		d = a
-	else
-		c = a
-		d = b
-	end
-
-	return ('%.1f' % (amount(c)[0..-2].to_f - amount(d)[0..-2].to_f)).to_s + '%'
+def span_of_time_in_percent_of_year(a, b)
+	percent_year_in_seconds(a-b).abs
 end
